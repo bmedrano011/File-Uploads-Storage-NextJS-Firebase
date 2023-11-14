@@ -16,6 +16,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "firebase": "^10.6.0",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
