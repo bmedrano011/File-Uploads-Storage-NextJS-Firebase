@@ -29,10 +29,11 @@ Before running the project, make sure you have the following installed:
    cd your-repository-folder
    ```
 
-Install the dependencies:
+2. Install the dependencies:
 
-sh 2. Install the dependencies:
+```sh
 npm install
+```
 
 # or
 
@@ -51,11 +52,10 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-measurement-id
 
 4. Run the development server:
-   npm run dev
 
-# or
-
-yarn dev
+```sh
+   npm run dev or yarn dev
+```
 
 ### Usage
 
