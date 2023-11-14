@@ -1,45 +1,68 @@
-# Next.js example
+# File Upload Application with Next.js, Material-UI, and Firebase
 
-## How to use
+This project is a full-stack application demonstrating how to implement file uploads and storage using Next.js, Material-UI, and Firebase Storage.
 
-Download the example [or clone the repo](https://github.com/mui/material-ui):
+## Features
 
-<!-- #default-branch-switch -->
+- File upload to Firebase Storage using Next.js API routes.
+- Display file upload progress with Material-UI LinearProgress bar.
+- List and categorize uploaded files by year using dynamic tabs.
+- Environment variable integration for secure credential management.
 
-```sh
-curl https://codeload.github.com/mui/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/nextjs
-cd nextjs
-```
+## Getting Started
 
-Install it and run:
+These instructions will get your copy of the project up and running on your local machine for development and testing purposes.
 
-```sh
+### Prerequisites
+
+Before running the project, make sure you have the following installed:
+
+- Node.js (12.x or higher)
+- npm or Yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/bmedrano011/File-Uploads-Storage-NextJS-Firebase.git
+   cd your-repository-folder
+   ```
+
+Install the dependencies:
+
+sh 2. Install the dependencies:
 npm install
-npm run dev
-```
 
-or:
+# or
 
-<!-- #default-branch-switch -->
+yarn install
 
-[![Edit on StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/mui/material-ui/tree/master/examples/nextjs)
+3. Set up your Firebase project and obtain your Firebase configuration. Create a .env.local file at the root of the project and fill in your Firebase credentials:
 
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui/material-ui/tree/master/examples/nextjs)
+# .env.local
 
-## The idea behind the example
+NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-auth-domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-storage-bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-measurement-id
 
-The project uses [Next.js](https://github.com/vercel/next.js), which is a framework for server-rendered React apps.
-It includes `@mui/material` and its peer dependencies, including `emotion`, the default style engine in MUI v5.
-If you prefer, you can [use styled-components instead](https://mui.com/material-ui/guides/interoperability/#styled-components).
+4. Run the development server:
+   npm run dev
 
-## The link component
+# or
 
-The [example folder](https://github.com/mui/material-ui/tree/HEAD/examples/nextjs-with-typescript) provides an adapter for the use of [Next.js's Link component](https://nextjs.org/docs/api-reference/next/link) with MUI.
-More information [in the documentation](https://mui.com/material-ui/guides/routing/#next-js).
+yarn dev
 
-## What's next?
+### Usage
 
-<!-- #default-branch-switch -->
+After setting up your environment, you can start uploading files through the UI. The uploaded files will be displayed below the upload button, and you can manage or view these files in your Firebase Storage console.
 
-You now have a working example project.
-You can head back to the documentation, continuing browsing it from the [templates](https://mui.com/material-ui/getting-started/templates/) section.
+### Contact
+
+Your Name - bam011.dev@example.com
+
+Project Link: https://github.com/bmedrano011/File-Uploads-Storage-NextJS-Firebase
