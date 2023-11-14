@@ -10,39 +10,66 @@ export default function UploadButtons({ onFileUpload }) {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
 
-  const handleUpload = (event) => {
-    const file = event.target.files[0]; // Get the file
-    if (!file) return;
+  const checkAndUploadFile = (file) => {
+    const storageRef = ref(storage, "uploads");
+    // List all files in the 'uploads/' directory
+    listAll(storageRef)
+      .then((listResults) => {
+        const files = listResults.items;
+        // Check the number of files, if it's 10 or more, delete the oldest
+        if (files.length >= 10) {
+          // Sort files by name assuming the name includes a timestamp or is formatted in such a way
+          // that sorting them lexicographically results in the oldest being first
+          const oldestFileRef = files.sort((a, b) =>
+            a.name.localeCompare(b.name)
+          )[0];
+          // Delete the oldest file
+          return deleteObject(oldestFileRef);
+        }
+      })
+      .then(() => {
+        // Proceed to upload the new file
+        uploadFile(file);
+      })
+      .catch((error) => {
+        console.error("Failed to upload new file:", error);
+      });
+  };
 
-    const storageRef = ref(storage, `uploads/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+  const uploadFile = (file) => {
+    const fileRef = ref(storage, `uploads/${file.name}`);
+    const uploadTask = uploadBytesResumable(fileRef, file);
 
-    setUploading(true); // Start the upload process
-
-    // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        // Update the progress bar state
+        // Update progress
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setUploadProgress(progress);
       },
       (error) => {
-        // Handle unsuccessful uploads
+        // Handle errors
         console.error("Upload failed", error);
-        setUploading(false); // Reset uploading state
+        setUploading(false);
       },
       () => {
-        // Handle successful uploads on complete
+        // Handle successful upload
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
-          setUploading(false); // Reset uploading state
-          setUploadProgress(0); // Reset progress bar
-          onFileUpload(downloadURL, file.name); // Call the provided callback
+          setUploading(false);
+          setUploadProgress(0);
+          onFileUpload(downloadURL, file.name); // Callback after successful upload
         });
       }
     );
+  };
+
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    setUploading(true); // Start the upload process UI indication
+    checkAndUploadFile(file); // Check if an existing file needs to be deleted before upload
   };
 
   return (
